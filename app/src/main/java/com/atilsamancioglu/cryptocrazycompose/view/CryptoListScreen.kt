@@ -170,8 +170,8 @@ fun CryptoRow(navController: NavController,crypto: CryptoListItem) {
         onRetry: () -> Unit
     ) {
         Column {
-            Text(error, color = Color.Red, fontSize = 18.sp)
-            Spacer(modifier = Modifier.height(8.dp))
+            Text(error, color = Color.Red, fontSize = 20.sp)
+            Spacer(modifier = Modifier.height(10.dp))
             Button(
                 onClick = { onRetry() },
                 modifier = Modifier.align(Alignment.CenterHorizontally)

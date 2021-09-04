@@ -9,8 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.produceState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +24,11 @@ import com.atilsamancioglu.cryptocrazycompose.model.Crypto
 import com.atilsamancioglu.cryptocrazycompose.model.CryptoItem
 import com.atilsamancioglu.cryptocrazycompose.util.Resource
 import com.atilsamancioglu.cryptocrazycompose.viewmodel.CryptoDetailViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 @Composable
 fun CryptoDetailScreen(
@@ -33,11 +37,48 @@ fun CryptoDetailScreen(
     navController: NavController,
     viewModel: CryptoDetailViewModel = hiltViewModel()
 ) {
+    /*
+
+    //Step 1 -> Wrong
+
+       val scope = rememberCoroutineScope()
+       //Stateless
+       //var cryptoItem : Resource<Crypto> = Resource.Loading()
+
+       //Stateful
+       var cryptoItem by remember { mutableStateOf<Resource<Crypto>>(Resource.Loading())}
+
+         scope.launch {
+             cryptoItem = viewModel.getCrypto(id)
+             println(cryptoItem.data)
+         }
+
+      */
+
+    /*
+       //Step 2 -> Better
+
+       //Stateless
+          //var cryptoItem : Resource<Crypto> = Resource.Loading()
+
+          //Stateful
+          var cryptoItem by remember { mutableStateOf<Resource<Crypto>>(Resource.Loading())}
+
+            LaunchedEffect(key1 = Unit) {
+                cryptoItem = viewModel.getCrypto(id)
+                println(cryptoItem.data)
+            }
+    */
+
+       //Step 3 -> Best
+
     val cryptoItem = produceState<Resource<Crypto>>(initialValue = Resource.Loading()) {
         value = viewModel.getCrypto(id)
     }.value
 
-    Box(modifier = Modifier.fillMaxSize()
+
+    Box(modifier = Modifier
+        .fillMaxSize()
         .background(MaterialTheme.colors.secondary),
         contentAlignment = Alignment.Center,
     ) {
@@ -58,7 +99,7 @@ fun CryptoDetailScreen(
                         contentDescription = selectedCrypto.name,
                         modifier = Modifier
                             .padding(16.dp)
-                            .size(200.dp,200.dp)
+                            .size(200.dp, 200.dp)
                             .clip(CircleShape)
                             .border(2.dp, Color.Gray, CircleShape)
                     )
@@ -86,6 +127,4 @@ fun CryptoDetailScreen(
 
         }
     }
-
-
 }
