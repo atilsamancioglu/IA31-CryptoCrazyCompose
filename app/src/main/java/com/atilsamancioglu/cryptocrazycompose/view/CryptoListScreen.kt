@@ -121,7 +121,7 @@ import com.atilsamancioglu.cryptocrazycompose.viewmodel.CryptoListViewModel
                 CircularProgressIndicator(color = MaterialTheme.colors.primary)
             }
             if(errorMessage.isNotEmpty()) {
-                RetrySection(error = errorMessage) {
+                RetryView(error = errorMessage) {
                     viewModel.loadCryptos()
                 }
             }
@@ -165,7 +165,7 @@ fun CryptoRow(navController: NavController,crypto: CryptoListItem) {
 }
 
     @Composable
-    fun RetrySection(
+    fun RetryView(
         error: String,
         onRetry: () -> Unit
     ) {
