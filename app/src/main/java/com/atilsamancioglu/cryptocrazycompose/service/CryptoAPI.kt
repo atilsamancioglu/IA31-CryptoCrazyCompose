@@ -7,6 +7,13 @@ import retrofit2.http.Query
 
 interface CryptoAPI {
 
+    @GET("cryptolist.json")
+    suspend fun getCryptoList(): CryptoList
+
+    @GET("crypto.json")
+    suspend fun getCrypto(): Crypto
+
+    /*
     @GET("prices")
     suspend fun getCryptoList(
         @Query("key") key: String,
@@ -18,4 +25,6 @@ interface CryptoAPI {
         @Query("ids") id : String,
         @Query("attributes") attributes: String
     ): Crypto
+
+     */
 }

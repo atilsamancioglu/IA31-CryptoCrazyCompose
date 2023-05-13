@@ -7,8 +7,8 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.atilsamancioglu.cryptocrazycompose.ui.theme.CryptoCrazyComposeTheme
 import com.atilsamancioglu.cryptocrazycompose.view.CryptoDetailScreen
 import com.atilsamancioglu.cryptocrazycompose.view.CryptoListScreen

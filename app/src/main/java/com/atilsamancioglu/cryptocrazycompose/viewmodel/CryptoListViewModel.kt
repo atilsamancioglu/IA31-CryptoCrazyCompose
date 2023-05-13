@@ -70,6 +70,9 @@ class CryptoListViewModel @Inject constructor(
                     errorMessage.value = result.message!!
                     isLoading.value = false
                 }
+                is Resource.Loading -> {
+                    errorMessage.value = ""
+                }
             }
         }
     }
